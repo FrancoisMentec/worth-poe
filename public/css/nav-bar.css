@@ -30,3 +30,14 @@
 .nav-bar a.active {
   text-shadow: 0 0 25px white;
 }
+
+.github {
+  float: right;
+}
+
+.github svg {
+  vertical-align: middle;
+  margin-right: 8px;
+  position: relative;
+  top: -2px;
+}
