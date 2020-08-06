@@ -32,21 +32,12 @@ let init = false
 
 async function fetchPrice () {
   for (let league of LEAGUES_ALIAS) {
-    await renders[league].fetchPrice()
-    console.log(`Prices fetched for ${league}`)
+    renders[league].fetchPrice().then(() => {
+      console.log(`Prices fetched for ${league}`)
+    })
   }
 
   init = true
-
-  /*for (let name in renders[LEAGUES_ALIAS[0]].prices) {
-    let res = await trade.makeLink(name)
-    while (res == 429) {
-      console.log('Too many request, sleep for 10 sec')
-      await sleep(10000)
-      res = await trade.makeLink(name)
-    }
-  }
-  console.log('Trade links made')*/
 
   setTimeout(fetchPrice, FETCH_INTERVAL)
 }
