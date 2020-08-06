@@ -1,7 +1,3 @@
-/*fetch('/price').then(response => response.json()).then(data => {
-  console.log(data)
-})*/
-
 function sortTable (table, index, reverse=false) {
   let switching = true
   while (switching) {
@@ -49,11 +45,19 @@ function sortAllTable () {
 
 sortAllTable()
 
-/*document.addEventListener('click', e => {
-  if (e.srcElement.tagName === 'TH') {
-    let table = e.srcElement
-    while (table.tagName !== 'TABLE') table = table.parentNode
-
-    sortTable(table, e.srcElement.cellIndex)
+let content = document.getElementById('content')
+document.getElementById('search').addEventListener('input', e => {
+  let regExp = new RegExp(`${e.srcElement.value}`, 'gmi')
+  let visibleLevel = Number.POSITIVE_INFINITY
+  for (let child of content.children) {
+    let match = regExp.test(child.textContent)
+    if (/H\d/.test(child.tagName)) {
+      let level = parseInt(child.tagName[1])
+      if (match) visibleLevel = Math.min(visibleLevel, level)
+      else if (level <= visibleLevel) visibleLevel = Number.POSITIVE_INFINITY
+    }
+    child.style.display = match || visibleLevel < Number.POSITIVE_INFINITY
+      ? ''
+      : 'none'
   }
-})*/
+})

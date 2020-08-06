@@ -41,3 +41,19 @@
   position: relative;
   top: -2px;
 }
+
+#search {
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: transparent;
+  color: white;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 8px 0 8px;
+  outline: none;
+}
+
+#search:active, #search:focus {
+  background-color: white;
+  color: black;
+}
