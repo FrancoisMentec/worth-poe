@@ -3,6 +3,7 @@ html
     title Worth PoE
     link(rel='stylesheet', href='/css/style.css')
     link(rel='stylesheet', href='/css/nav-bar.css')
+    link(rel='stylesheet', href='/css/divination.css')
   body
     div.nav-bar
       a(href='/challenge', class=league === 'challenge' ? 'active' : '') Challenge
@@ -12,84 +13,87 @@ html
       a(href='https://github.com/FrancoisMentec/worth-poe', class="github")
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true" fill="white"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
         | GitHub
-    h1 Worth PoE
-    p 
-      | This is a website to check what is the most profitable choice in a given situation (e.g. Apex of Ascension).
-      | Prices are fetched from 
-      a(href='https://poe.ninja/') poe.ninja
-      |  every #{fetchInterval / (60 * 1000)} minutes.
-      | This website isn't affiliated with either poe.ninja nor GGG.
     
-    h2 Apex of Ascension
-    table
-      thead
-        tr
-          th Vial
-          th Item
-          th Result
-          th.right Profit
-      tbody
-        tr !{r.recipe(["Vial of Awakening", "Apep's Slumber"], ["Apep's Supremacy"])}
-        tr !{r.recipe(["Vial of Consequence", "Coward's Chains"], ["Coward's Legacy"])}
-        tr !{r.recipe(["Vial of Dominance", "Architect's Hand"], ["Slavedriver's Hand"])}
-        tr !{r.recipe(["Vial of Fate", "Story of the Vaal"], ["Fate of the Vaal"])}
-        tr !{r.recipe(["Vial of Summoning", "Mask of the Spirit Drinker"], ["Mask of the Stitched Demon"])}
-        tr !{r.recipe(["Vial of the Ritual", "Dance of the Offered"], ["Omeyocan"])}
-        tr !{r.recipe(["Vial of Transcendence", "Tempered Flesh"], ["Transcendent Flesh"])}
-        tr !{r.recipe(["Vial of Transcendence", "Tempered Spirit"], ["Transcendent Spirit"])}
-        tr !{r.recipe(["Vial of Transcendence", "Tempered Mind"], ["Transcendent Mind"])}
-        tr !{r.recipe(["Vial of Sacrifice", "Sacrificial Heart"], ["Zerphi's Heart"])}
-        tr !{r.recipe(["Vial of the Ghost", "Soul Catcher"], ["Soul Ripper"])}
-    
-    h2 Challenges
-    h3 Divination for Essence
-    table(reverse="true")
-      thead
-        tr
-          th Card
-          th.right Number
-          th.right Cost
-      tbody
-        tr !{r.divination("Harmony of Souls")}
-        tr !{r.divination("The Cacophony")}
-        tr !{r.divination("Three Voices")}
+    div.content
+      h1 Worth PoE
+      p 
+        | This is a website to check what is the most profitable choice in a given situation (e.g. Apex of Ascension).
+        | Prices are fetched from 
+        a(href='https://poe.ninja/') poe.ninja
+        |  every #{fetchInterval / (60 * 1000)} minutes.
+        | This website isn't affiliated with either poe.ninja nor GGG.
       
-    h3 Divination for Gem
-    table(reverse="true")
-      thead
-        tr
-          th Card
-          th.right Number
-          th.right Cost
-      tbody
-        tr !{r.divination("Deathly Designs")}
-        tr !{r.divination("Dialla's Subjugation")}
-        tr !{r.divination("Gemcutter's Promise")}
-        tr !{r.divination("Gift of the Gemling Queen")}
-        tr !{r.divination("The Cataclysm")}
-        tr !{r.divination("The Cheater")}
-        tr !{r.divination("The Fox")}
-        tr !{r.divination("The Rite of Elements")}
-        tr !{r.divination("The Summoner")}
-        tr !{r.divination("The Wilted Rose")}
+      h2 Apex of Ascension
+      table
+        thead
+          tr
+            th Vial
+            th Item
+            th Result
+            th.right Profit
+        tbody
+          tr !{r.recipe(["Vial of Awakening", "Apep's Slumber"], ["Apep's Supremacy"])}
+          tr !{r.recipe(["Vial of Consequence", "Coward's Chains"], ["Coward's Legacy"])}
+          tr !{r.recipe(["Vial of Dominance", "Architect's Hand"], ["Slavedriver's Hand"])}
+          tr !{r.recipe(["Vial of Fate", "Story of the Vaal"], ["Fate of the Vaal"])}
+          tr !{r.recipe(["Vial of Summoning", "Mask of the Spirit Drinker"], ["Mask of the Stitched Demon"])}
+          tr !{r.recipe(["Vial of the Ritual", "Dance of the Offered"], ["Omeyocan"])}
+          tr !{r.recipe(["Vial of Transcendence", "Tempered Flesh"], ["Transcendent Flesh"])}
+          tr !{r.recipe(["Vial of Transcendence", "Tempered Spirit"], ["Transcendent Spirit"])}
+          tr !{r.recipe(["Vial of Transcendence", "Tempered Mind"], ["Transcendent Mind"])}
+          tr !{r.recipe(["Vial of Sacrifice", "Sacrificial Heart"], ["Zerphi's Heart"])}
+          tr !{r.recipe(["Vial of the Ghost", "Soul Catcher"], ["Soul Ripper"])}
+      
+      h2 Challenges
+      h3 Divination for Essence
+      table(reverse="true")
+        thead
+          tr
+            th Card
+            th.right Number
+            th.right Cost
+        tbody
+          tr !{r.divination("Harmony of Souls")}
+          tr !{r.divination("The Cacophony")}
+          tr !{r.divination("Three Voices")}
         
-    h3 Divination for Influenced Item
-    table(reverse="true")
-      thead
-        tr
-          th Card
-          th.right Number
-          th.right Cost
-      tbody
-        tr !{r.divination("A Familiar Call")}
-        tr !{r.divination("Dark Dreams")}
-        tr !{r.divination("Nook's Crown")}
-        tr !{r.divination("Perfection")}
-        tr !{r.divination("Prometheus' Armoury")}
-        tr !{r.divination("The Awakened")}
-        tr !{r.divination("The Celestial Stone")}
-        tr !{r.divination("The Hale Heart")}
-        tr !{r.divination("The Lord of Celebration")}
-        tr !{r.divination("The Undisputed")}
-        tr !{r.divination("The White Knight")}
+      h3 Divination for Gem
+      table(reverse="true")
+        thead
+          tr
+            th Card
+            th.right Number
+            th.right Cost
+        tbody
+          tr !{r.divination("Deathly Designs")}
+          tr !{r.divination("Dialla's Subjugation")}
+          tr !{r.divination("Gemcutter's Promise")}
+          tr !{r.divination("Gift of the Gemling Queen")}
+          tr !{r.divination("The Cataclysm")}
+          tr !{r.divination("The Cheater")}
+          tr !{r.divination("The Fox")}
+          tr !{r.divination("The Rite of Elements")}
+          tr !{r.divination("The Summoner")}
+          tr !{r.divination("The Wilted Rose")}
+          
+      h3 Divination for Influenced Item
+      table(reverse="true")
+        thead
+          tr
+            th Card
+            th.right Number
+            th.right Cost
+        tbody
+          tr !{r.divination("A Familiar Call")}
+          tr !{r.divination("Dark Dreams")}
+          tr !{r.divination("Nook's Crown")}
+          tr !{r.divination("Perfection")}
+          tr !{r.divination("Prometheus' Armoury")}
+          tr !{r.divination("The Awakened")}
+          tr !{r.divination("The Celestial Stone")}
+          tr !{r.divination("The Hale Heart")}
+          tr !{r.divination("The Lord of Celebration")}
+          tr !{r.divination("The Undisputed")}
+          tr !{r.divination("The White Knight")}
   script(src='/js/main.js')
+  script(src='/js/itemPreview.js')

@@ -15,6 +15,19 @@ class Render {
     return Math.round(value * 100) / 100
   }
 
+  encodeModifiers (modifiers) {
+    return modifiers.map(m => m.text.replace(/\n/g, '<br>')).join('<sep>')
+  }
+
+  encodeFlavour (flavour) {
+    if (typeof flavour !== 'string') return ''
+    let res = flavour.replace(/"/g, '&#x22;')
+    res = res.replace(/\n/g, '<br>')
+    res = res.replace(/{|}/g, '')
+    res = res.replace(/<\/?size[^>]*>/g, '')
+    return res
+  }
+
   async fetchPrice () {
     try {
       this.prices = await price.getAllPrices(this.league)
@@ -31,10 +44,10 @@ class Render {
     return res
   }
 
-  item (name) {
+  item (name, type=null) {
     if (typeof this.prices[name] == 'undefined') return `<div class="item">Item missing: ${name}</div>`
     let item = this.prices[name]
-    return `<a class="item", href="${this.tradeLink(name)}" target="_blank">
+    return `<a class="item", href="${this.tradeLink(name)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${item.stackSize}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
         <div class="name">
           <img src="${item.icon}"> ${name}
         </div>
@@ -77,7 +90,7 @@ class Render {
     let stack = typeof this.prices[name] !== 'undefined'
       ? this.prices[name].stackSize
       : null
-    return `<td>${this.item(name)}</td>
+    return `<td>${this.item(name, 'divination')}</td>
       <td class="right">${stack != null ? stack : '-'}</td>
       <td class="price">${stack != null ? this.round(this.prices[name].chaosValue * stack) : '-'}</td>`
   }

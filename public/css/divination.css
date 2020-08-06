@@ -1,0 +1,125 @@
+.divination {
+  position: fixed;
+  top: 80px;
+  right: 16px;
+  z-index: 2000;
+  width: 440px;
+  height: 668px;
+  text-align: center;
+  font-family: Fontin-SmallCaps, Verdana, Arial, Helvetica, sans-serif;
+  pointer-events: none;
+}
+
+.divination .art {
+  display: block;
+  width: 390px;
+  height: 280px;
+  position: absolute;
+  top: 56px;
+  left: 26px;
+  background-color: black;
+}
+
+.divination .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.divination .frame {
+  width: 100%;
+  height: 100%;
+}
+
+.divination .name {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  line-height: 44px;
+  color: #030301;
+  font-size: 20px;
+}
+
+.divination .stack {
+  display: block;
+  position: absolute;
+  top: 309px;
+  left: 42px;
+  width: 70px;
+  font-size: 16px;
+  line-height: 38px;
+  color: white;
+}
+
+.divination .reward {
+  display: table;
+  position: absolute;
+  top: 334px;
+  left: 35px;
+  font-size: 16px;
+}
+
+.divination .reward > span {
+  display: table-cell;
+  vertical-align: middle;
+  width: 374px;
+  height: 110px;
+  line-height: 1.5em;
+}
+
+.text-color.gemitem {
+  color: rgb(27,162,155);
+}
+
+.text-color.default {
+  color: rgb(127,127,127);
+}
+
+.text-color.currency, .text-color.currencyitem {
+  color: rgb(170,158,130);
+}
+
+.text-color.normal, .text-color.whiteitem {
+  color: rgb(200,200,200);
+}
+
+.text-color.augmented, .text-color.magic, .text-color.magicitem {
+  color: rgb(136,136,255);
+}
+
+.text-color.rare, .text-color.rareitem {
+  color: rgb(255,255,119);
+}
+
+.text-color.unique, .text-color.uniqueitem {
+  color: rgb(175,96,37);
+}
+
+.text-color.corrupted {
+  color: rgb(210,0,0);
+}
+
+.text-color.prophecy {
+  color: rgb(181,75,255);
+}
+
+.divination .flavour {
+  color: #af6025;
+  font-style: italic;
+  display: table;
+  position: absolute;
+  top: 452px;
+  left: 35px;
+  font-size: 16px;
+}
+
+.divination .flavour span {
+  display: table-cell;
+  vertical-align: middle;
+  width: 374px;
+  height: 184px;
+  line-height: 1.5em;
+}

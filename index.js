@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
 
 app.get('/:league', (req, res) => {
   if (LEAGUES_ALIAS.includes(req.params.league)) {
-    if (init) res.render(__dirname + '/public/html/index.pug', { r: renders[req.params.league], league: req.params.league, fetchInterval: FETCH_INTERVAL })
+    if (renders[req.params.league].ready) res.render(__dirname + '/public/html/index.pug', { r: renders[req.params.league], league: req.params.league, fetchInterval: FETCH_INTERVAL })
     else res.render(__dirname + '/public/html/not_ready.pug')
   } else {
     res.redirect('/challenge')

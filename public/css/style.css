@@ -8,14 +8,26 @@
   src: url(/font/Roboto-Bold.ttf);
 }
 
+@font-face {
+  font-family: Fontin-SmallCaps;
+  src: url(/font/Fontin-SmallCaps.ttf);
+}
+
 html, body {
-  font-family: Roboto, Verdana;
+  font-family: Roboto, Verdana, Arial, Helvetica, sans-serif;
   background-color: #37474f;
   color: white;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  padding-top: 70px;
+  padding-top: 64px;
+}
+
+body > .content {
+  padding: 16px;
+  width: fit-content;
 }
 
 a {
