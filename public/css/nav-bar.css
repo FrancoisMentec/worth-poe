@@ -1,0 +1,32 @@
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 0 16px 0 16px;
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
+  background-color: #102027;
+  color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.nav-bar a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  padding: 0 16px 0 16px;
+  font-family: Roboto-Bold;
+  height: 100%;
+}
+
+.nav-bar a:hover {
+  background-color: #263238;
+}
+
+.nav-bar a.active {
+  text-shadow: 0 0 25px white;
+}
