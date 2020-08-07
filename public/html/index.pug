@@ -20,11 +20,14 @@ html
     div#content
       h1 Worth PoE
       p 
-        | This is a website to check what is the most profitable choice in a given situation (e.g. Apex of Ascension).
+        | This is a website to check what is the most profitable choice in a given situation (e.g. Apex of Ascension), or the less expensive (e.g. a challenge).
         | Prices are fetched from 
         a(href='https://poe.ninja/') poe.ninja
         |  every #{fetchInterval / (60 * 1000)} minutes.
         | This website isn't affiliated with either poe.ninja nor GGG.
+        | If you want to report a bug/error, or request a feature I invite you to 
+        a(href='https://github.com/FrancoisMentec/worth-poe/issues/new') submit a new issue
+        |  on GitHub (make sure a similar issue haven't been submitted yet).
       
       h2 Apex of Ascension
       table
@@ -115,6 +118,25 @@ html
           tr !{r.divination("The Garish Power")}
           tr !{r.divination("The Mountain")}
           tr !{r.divination("The Primordial")}
+      
+      h3 Divination for Prophecy
+      table(reverse="true")
+        thead
+          tr
+            th Card
+            th.right Number
+            th.right Cost
+        tbody
+          tr !{r.divination("A Note in the Wind")}
+          tr !{r.divination("Akil's Prophecy")}
+          tr !{r.divination("Beauty Through Death")}
+          tr !{r.divination("Friendship")}
+          tr !{r.divination("Immortal Resolve")}
+          tr !{r.divination("The Iron Bard")}
+          tr !{r.divination("The Jeweller's Boon")}
+          tr !{r.divination("The Mad King")}
+          tr !{r.divination("The Side Quest")}
+          tr !{r.divination("The Valley of Steel Boxes")}
           
     footer Made with <3 by 
       a(href="https://github.com/FrancoisMentec") François Mentec
