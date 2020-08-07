@@ -42,6 +42,26 @@
   top: -2px;
 }
 
+#search-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+#search-wrap .material-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  box-sizing: border-box;
+  line-height: 36px;
+  text-align: center;
+  background-color: #102027;
+  border: 1px solid white;
+  border-radius: 4px 0 0 4px;
+  pointer-events: none;
+}
+
 #search {
   border: 1px solid white;
   border-radius: 4px;
@@ -49,7 +69,7 @@
   color: white;
   height: 36px;
   line-height: 36px;
-  padding: 0 8px 0 8px;
+  padding: 0 8px 0 44px;
   outline: none;
 }
 
