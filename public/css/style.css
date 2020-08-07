@@ -79,6 +79,7 @@ table {
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  margin: 16px 0 16px 0;
 }
 
 thead {
@@ -163,7 +164,9 @@ tbody td {
 }
 
 footer {
-  margin: 16px;
+  padding: 16px;
+  background-color: #102027;
+  text-align: center;
 }
 
 footer .material-icons {
