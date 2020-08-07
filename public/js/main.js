@@ -48,7 +48,7 @@ sortAllTable()
 let content = document.getElementById('content')
 function search (query) {
   if (query.length > 0) {
-    let regExp = new RegExp(query, 'gmi')
+    let regExp = new RegExp(query, 'i')
     let visibleLevel = Number.POSITIVE_INFINITY
     let i = 0
     for (let child of content.children) {
