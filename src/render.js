@@ -45,7 +45,7 @@ class Render {
   }
 
   item (name, type=null) {
-    if (typeof this.prices[name] == 'undefined') return `<div class="item">Item missing: ${name}</div>`
+    if (typeof this.prices[name] == 'undefined') return `<td><div class="item">Item missing: ${name}</div></td>`
     let item = this.prices[name]
     return `<td value="${item.chaosValue}">
     <a class="item", href="${this.tradeLink(name)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${item.stackSize}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
