@@ -165,3 +165,9 @@ tbody td {
 footer {
   margin: 16px;
 }
+
+footer .material-icons {
+  position: relative;
+  top: 5px;
+  color: #f44336;
+}
