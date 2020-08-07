@@ -47,14 +47,15 @@ class Render {
   item (name, type=null) {
     if (typeof this.prices[name] == 'undefined') return `<div class="item">Item missing: ${name}</div>`
     let item = this.prices[name]
-    return `<a class="item", href="${this.tradeLink(name)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${item.stackSize}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
+    return `<td value="${item.chaosValue}">
+    <a class="item", href="${this.tradeLink(name)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${item.stackSize}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
         <div class="name">
           <img src="${item.icon}"> ${name}
         </div>
         <div class="price">
-          ${item.chaosValue}
+          ${this.round(item.chaosValue)}
         </div>
-      </a>`
+      </a></td>`
   }
 
   profit (composants, results) {
@@ -65,23 +66,28 @@ class Render {
     </div>`
   }
 
-  recipe (composants, results) {
+  recipe (composants, results, includeCost=false) {
     let res = ''
     let cost = 0
     let itemMissing = false
     for (let item of composants) {
-      res += `<td>${this.item(item)}</td>`
+      res += this.item(item)
       if (this.prices[item]) cost += this.prices[item].chaosValue
       else itemMissing = true
     }
+    if (includeCost) {
+      res += !itemMissing
+        ? `<td class="price" value="${cost}">${this.round(cost)}</td>`
+        : '<td class="price">-</td>'
+    }
     let turnover = 0
     for (let item of results) {
-      res += `<td>${this.item(item)}</td>`
+      res += this.item(item)
       if (this.prices[item]) turnover += this.prices[item].chaosValue
       else itemMissing = true
     }
     res += !itemMissing
-      ? `<td class="price">${this.round(turnover - cost)}</td>`
+      ? `<td class="price" value="${turnover - cost}">${this.round(turnover - cost)}</td>`
       : '<td class="price">-</td>'
     return res
   }
@@ -90,9 +96,17 @@ class Render {
     let stack = typeof this.prices[name] !== 'undefined'
       ? this.prices[name].stackSize
       : null
-    return `<td>${this.item(name, 'divination')}</td>
-      <td class="right">${stack != null ? stack : '-'}</td>
-      <td class="price">${stack != null ? this.round(this.prices[name].chaosValue * stack) : '-'}</td>`
+    let price = stack != null
+      ? this.prices[name].chaosValue * stack
+      : null
+    let res = this.item(name, 'divination')
+    res += stack != null
+      ? `<td class="right" value="${stack}">${stack}</td>`
+      : `<td class="right">-</td>`
+    res += stack != null
+      ? `<td class="price" value="${price}">${stack != null ? this.round(price) : '-'}</td>`
+      : `<td class="price">-</td>`
+    return res
   }
 }
 

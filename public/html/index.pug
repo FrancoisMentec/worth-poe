@@ -36,7 +36,7 @@ html
             th Vial
             th Item
             th Result
-            th.right Profit
+            th.price Profit
         tbody
           tr !{r.recipe(["Vial of Awakening", "Apep's Slumber"], ["Apep's Supremacy"])}
           tr !{r.recipe(["Vial of Consequence", "Coward's Chains"], ["Coward's Legacy"])}
@@ -53,24 +53,24 @@ html
       h1 Challenges
       h2 Divination for Item
       h3 Divination for Essence
-      table(reverse="true")
+      table
         thead
           tr
             th Card
             th.right Number
-            th.right Cost
+            th.price Cost
         tbody
           tr !{r.divination("Harmony of Souls")}
           tr !{r.divination("The Cacophony")}
           tr !{r.divination("Three Voices")}
         
       h3 Divination for Gem
-      table(reverse="true")
+      table
         thead
           tr
             th Card
             th.right Number
-            th.right Cost
+            th.price Cost
         tbody
           tr !{r.divination("Deathly Designs")}
           tr !{r.divination("Dialla's Subjugation")}
@@ -84,12 +84,12 @@ html
           tr !{r.divination("The Wilted Rose")}
           
       h3 Divination for Influenced Item
-      table(reverse="true")
+      table
         thead
           tr
             th Card
             th.right Number
-            th.right Cost
+            th.price Cost
         tbody
           tr !{r.divination("A Familiar Call")}
           tr !{r.divination("Dark Dreams")}
@@ -104,12 +104,12 @@ html
           tr !{r.divination("The White Knight")}
       
       h3 Divination for Jewel
-      table(reverse="true")
+      table
         thead
           tr
             th Card
             th.right Number
-            th.right Cost
+            th.price Cost
         tbody
           tr !{r.divination("Azyran's Reward")}
           tr !{r.divination("Peaceful Moments")}
@@ -121,12 +121,12 @@ html
           tr !{r.divination("The Primordial")}
       
       h3 Divination for Prophecy
-      table(reverse="true")
+      table
         thead
           tr
             th Card
             th.right Number
-            th.right Cost
+            th.price Cost
         tbody
           tr !{r.divination("A Note in the Wind")}
           tr !{r.divination("Akil's Prophecy")}
@@ -140,12 +140,12 @@ html
           tr !{r.divination("The Valley of Steel Boxes")}
       
       h3 Divination for Two-Implicit Unique Item
-      table(reverse="true")
+      table
         thead
           tr
             th Card
             th.right Number
-            th.right Cost
+            th.price Cost
         tbody
           tr !{r.divination("Arrogance of the Vaal")}
           tr !{r.divination("Echoes of Love")}
@@ -156,6 +156,19 @@ html
           tr !{r.divination("The Hive of Knowledge")}
           tr !{r.divination("The Price of Loyalty")}
           tr !{r.divination("The Sustenance")}
+          
+      h2 Upgrade Unique Items
+      h3 Fated Prophecy
+      table
+        thead
+          tr
+            th Prophecy
+            th Item
+            th.price Cost
+            th Result
+            th.price Profit
+        tbody
+          include fatedItems.pug
           
     footer Made with 
       span.material-icons favorite

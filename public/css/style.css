@@ -20,7 +20,7 @@
   src: url(/font/MaterialIcons-Regular.ttf);
 }
 
-.material-icons {
+.material-icons, th::before {
   font-family: Material-Icons;
   font-weight: normal;
   font-style: normal;
@@ -93,6 +93,17 @@ th, td {
   margin: 0;
 }
 
+th {
+  height: 56px;
+  line-height: 56px;
+  cursor: pointer;
+}
+
+th:hover {
+  /*background-color: rgba(255,255,255,0.05);*/
+  text-decoration: underline;
+}
+
 tbody tr:nth-child(even) {
   background-color: #62727b;
 }
@@ -101,9 +112,20 @@ tbody tr:nth-child(odd) {
   background-color: #4f5b62;
 }
 
-th {
-  height: 56px;
-  line-height: 56px;
+th::before {
+  content: "";
+  vertical-align: middle;
+  padding-right: 8px;
+  width: 32px;
+  text-align: center;
+}
+
+th[sort="ascend"]::before {
+  content: 'arrow_downward';
+}
+
+th[sort="descend"]::before {
+  content: 'arrow_upward';
 }
 
 td {

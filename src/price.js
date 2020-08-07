@@ -46,15 +46,25 @@ module.exports.getAllPrices = async function (league='challenge') {
     `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueWeapon&language=en`,
     `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueFlask&language=en`,
     `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueJewel&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=DivinationCard&language=en`
+    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=DivinationCard&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=Prophecy&language=en`
   ]
   let items = {}
   for (let url of urls) {
     try {
       let data = await getPriceFromNinja(url)
       for (let item in data) {
-        if (typeof items[item] !== 'undefined') throw new Error(`Tried to add an item that already exists: ${item}`)
-        items[item] = data[item]
+        if (typeof items[item] !== 'undefined') {
+          if (items[item].itemClass == data[item].itemClass) {
+            throw new Error(`Got two items with the same name (${item}) and the same item class (${data[item].itemClass})`)
+          } else {
+            let temp = {}
+            Object.assign(temp, items[item])
+            items[item] = {}
+            items[item][items[item].itemClass] = temp
+            items[item][data[item].itemClass] = data[item]
+          }
+        } else items[item] = data[item]
       }
     } catch (error) {
       console.error(`Error trying to fetch url ${url}:`)

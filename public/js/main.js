@@ -1,4 +1,13 @@
+function getValue (element, defaultValue=Number.NEGATIVE_INFINITY) {
+  return element.hasAttribute('value')
+    ? parseFloat(element.getAttribute('value'))
+    : defaultValue
+}
+
 function sortTable (table, index, reverse=false) {
+  let defaultValue = reverse
+    ? Number.POSITIVE_INFINITY
+    : Number.NEGATIVE_INFINITY
   let switching = true
   while (switching) {
     // Start by saying: no switching is done:
@@ -12,16 +21,9 @@ function sortTable (table, index, reverse=false) {
       shouldSwitch = false
       /* Get the two elements you want to compare,
       one from current row and one from the next: */
-      x = rows[i].getElementsByTagName("TD")[index].textContent
-      y = rows[i + 1].getElementsByTagName("TD")[index].textContent
 
-      x = x === '-'
-        ? reverse ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY
-        : parseFloat(x)
-
-      y = y === '-'
-        ? reverse ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY
-        : parseFloat(y)
+      x = getValue(rows[i].getElementsByTagName("TD")[index], defaultValue)
+      y = getValue(rows[i + 1].getElementsByTagName("TD")[index], defaultValue)
 
       // Check if the two rows should switch place:
       if ((!reverse && x < y) || (reverse && x > y)) {
@@ -37,9 +39,30 @@ function sortTable (table, index, reverse=false) {
   }
 }
 
+document.addEventListener('click', e => {
+  let elt = e.srcElement
+  if (elt.tagName == 'TH') {
+    for (let child of elt.parentNode.children) {
+      if (child != elt) child.setAttribute('sort', '')
+    }
+    let sort = elt.hasAttribute('sort')
+      ? elt.getAttribute('sort') == 'ascend' ? 'descend' : 'ascend'
+      : 'ascend'
+    sortTable(elt.parentNode.parentNode.parentNode, elt.cellIndex, sort == 'ascend')
+    elt.setAttribute('sort', sort)
+  }
+})
+
 function sortAllTable () {
   for (let table of document.getElementsByTagName('table')) {
-    sortTable(table, table.rows[0].children.length - 1, table.hasAttribute('reverse') ? (table.getAttribute('reverse') === 'true') : false)
+    let elt = Array.from(table.getElementsByTagName('th')).slice(-1)[0]
+    let sort = elt.hasAttribute('sort')
+      ? elt.getAttribute('sort')
+      : /Profit/.test(elt.textContent)
+        ? 'descend'
+        : 'ascend'
+    sortTable(table, table.rows[0].children.length - 1, sort == 'ascend')
+    elt.setAttribute('sort', sort)
   }
 }
 

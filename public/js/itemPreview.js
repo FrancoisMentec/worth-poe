@@ -31,7 +31,7 @@ for (let item of items) {
       document.body.appendChild(itemPreview)
     })
     item.addEventListener('mouseout', e => {
-      if (itemPreview.parentNode) itemPreview.parentNode.removeChild(itemPreview)
+      if (itemPreview && itemPreview.parentNode) itemPreview.parentNode.removeChild(itemPreview)
     })
   }
 }
