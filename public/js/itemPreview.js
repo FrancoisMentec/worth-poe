@@ -1,11 +1,11 @@
 let items = document.getElementsByClassName('item')
 
-let textColorRegex = /<([^>]+)>([\w\W]*)<\/\1>/gm
+let textColorRegex = /<(gemitem|default|currencyitem|normal|whiteitem|augmented|magic|magicitem|rare|rareitem|unique|uniqueitem|corrupted|prophecy)>{([^}]+)}/gm
 
-function parseDivinationreward (reward) {
+function parseDivinationReward (reward) {
   let res = reward //.replace(/<br>/g, '\n')
   res = res.replace(/<size:\d+>/gm, '')
-  while (/<(\w+)>{([^}]+)}/gm.test(res)) res = res.replace(/<(\w+)>{([^}]+)}/gm, '<span class="text-color $1">$2</span>')
+  while (textColorRegex.test(res)) res = res.replace(textColorRegex, '<span class="text-color $1">$2</span>')
   return res.replace(/{|}/g, '')
 }
 
@@ -22,7 +22,7 @@ for (let item of items) {
           <img class="frame" src="/img/divination_card_frame.png">
           <div class="name">${item.getAttribute('name')}</div>
           <div class="stack">${item.getAttribute('stackSize')}</div>
-          <div class="reward"><span>${parseDivinationreward(item.getAttribute('explicitModifiers'))}</span></div>
+          <div class="reward"><span>${parseDivinationReward(item.getAttribute('explicitModifiers'))}</span></div>
           <div class="flavour"><span>${item.getAttribute('flavourText')}</span></div>
         </div>`
       }
