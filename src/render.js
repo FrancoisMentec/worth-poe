@@ -16,6 +16,7 @@ class Render {
   }
 
   encodeModifiers (modifiers) {
+    if (!Array.isArray(modifiers)) return ''
     return modifiers.map(m => m.text.replace(/\n/g, '<br>')).join('<sep>')
   }
 
@@ -26,6 +27,10 @@ class Render {
     res = res.replace(/{|}/g, '')
     res = res.replace(/<\/?size[^>]*>/g, '')
     return res
+  }
+
+  getItem (name) {
+    return this.prices[name]
   }
 
   async fetchPrice () {
@@ -39,14 +44,14 @@ class Render {
 
   tradeLink (name) {
     let res = `/trade/${this.league}`
-    if ([5, 6].includes(this.prices[name].itemClass)) res += `?type=${encodeURIComponent(name)}`
+    if ([5, 6].includes(this.getItem(name).itemClass)) res += `?type=${encodeURIComponent(name)}`
     else res += `?name=${encodeURIComponent(name)}`
     return res
   }
 
   item (name, type=null) {
-    if (typeof this.prices[name] == 'undefined') return `<td><div class="item">Item missing: ${name}</div></td>`
-    let item = this.prices[name]
+    if (typeof this.getItem(name) == 'undefined') return `<td><div class="item">Item missing: ${name}</div></td>`
+    let item = this.getItem(name)
     return `<td value="${item.chaosValue}">
     <a class="item", href="${this.tradeLink(name)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${item.stackSize}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
         <div class="name">
@@ -59,8 +64,8 @@ class Render {
   }
 
   profit (composants, results) {
-    let cost = composants.map(i => this.prices[i].chaosValue).reduce((a, b) => a + b, 0)
-    let turnover = results.map(i => this.prices[i].chaosValue).reduce((a, b) => a + b, 0)
+    let cost = composants.map(i => this.getItem(i).chaosValue).reduce((a, b) => a + b, 0)
+    let turnover = results.map(i => this.getItem(i).chaosValue).reduce((a, b) => a + b, 0)
     return `<div class="price">
       ${this.round(turnover - cost)}
     </div>`
@@ -72,7 +77,7 @@ class Render {
     let itemMissing = false
     for (let item of composants) {
       res += this.item(item)
-      if (this.prices[item]) cost += this.prices[item].chaosValue
+      if (this.getItem(item)) cost += this.getItem(item).chaosValue
       else itemMissing = true
     }
     if (includeCost) {
@@ -83,7 +88,7 @@ class Render {
     let turnover = 0
     for (let item of results) {
       res += this.item(item)
-      if (this.prices[item]) turnover += this.prices[item].chaosValue
+      if (this.getItem(item)) turnover += this.getItem(item).chaosValue
       else itemMissing = true
     }
     res += !itemMissing
@@ -93,11 +98,11 @@ class Render {
   }
 
   divination (name) {
-    let stack = typeof this.prices[name] !== 'undefined'
-      ? this.prices[name].stackSize
+    let stack = typeof this.getItem(name) !== 'undefined'
+      ? this.getItem(name).stackSize
       : null
     let price = stack != null
-      ? this.prices[name].chaosValue * stack
+      ? this.getItem(name).chaosValue * stack
       : null
     let res = this.item(name, 'divination')
     res += stack != null

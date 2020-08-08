@@ -26,6 +26,16 @@ function getPriceFromNinja (url) {
           const data = JSON.parse(rawData)
           let items = {}
           for (let item of data.lines) {
+            if (typeof item.currencyTypeName !== 'undefined') { // This is currency
+              item.name = item.currencyTypeName
+              item.chaosValue = item.chaosEquivalent
+              for (let detail of data.currencyDetails) {
+                if (detail.name == item.name) {
+                  item.icon = detail.icon
+                  break
+                }
+              }
+            }
             items[item.name] = item
           }
           resolve(items)
@@ -39,15 +49,17 @@ function getPriceFromNinja (url) {
 }
 
 module.exports.getAllPrices = async function (league='challenge') {
+  let leagueEncoded = encodeURIComponent(league)
   const urls = [
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=Vial&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueArmour&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueAccessory&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueWeapon&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueFlask&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=UniqueJewel&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=DivinationCard&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${encodeURIComponent(league)}&type=Prophecy&language=en`
+    `https://poe.ninja/api/data/currencyoverview?league=${leagueEncoded}&type=Currency&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=Vial&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueArmour&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueAccessory&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueWeapon&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueFlask&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueJewel&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=DivinationCard&language=en`,
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=Prophecy&language=en`
   ]
   let items = {}
   for (let url of urls) {

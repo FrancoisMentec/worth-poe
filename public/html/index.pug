@@ -50,6 +50,35 @@ html
           tr !{r.recipe(["Vial of Sacrifice", "Sacrificial Heart"], ["Zerphi's Heart"])}
           tr !{r.recipe(["Vial of the Ghost", "Soul Catcher"], ["Soul Ripper"])}
       
+      h1 Blessed Items (Breach)
+      table
+        thead
+          tr
+            th Item
+            th Blessing
+            th Result
+            th.price Profit
+        tbody
+          tr !{r.recipe(["Eye of Chayula", "Blessing of Chayula"], ["Presence of Chayula"])}
+          tr !{r.recipe(["Skin of the Loyal", "Blessing of Chayula"], ["Skin of the Lords"])}
+          tr !{r.recipe(["The Blue Dream", "Blessing of Chayula"], ["The Blue Nightmare"])}
+          tr !{r.recipe(["The Green Dream", "Blessing of Chayula"], ["The Green Nightmare"])}
+          tr !{r.recipe(["The Red Dream", "Blessing of Chayula"], ["The Red Nightmare"])}
+          tr !{r.recipe(["Severed in Sleep", "Blessing of Chayula"], ["United in Dream"])}
+          tr !{r.recipe(["Voice of the Storm", "Blessing of Esh"], ["Choir of the Storm"])}
+          tr !{r.recipe(["Esh's Mirror", "Blessing of Esh"], ["Esh's Visage"])}
+          tr !{r.recipe(["Hand of Thought and Motion", "Blessing of Esh"], ["Hand of Wisdom and Action"])}
+          tr !{r.recipe(["The Halcyon", "Blessing of Tul"], ["The Pandemonius"])}
+          tr !{r.recipe(["The Snowblind Grace", "Blessing of Tul"], ["The Perfect Form"])}
+          tr !{r.recipe(["Tulborn", "Blessing of Tul"], ["Tulfall"])}
+          tr !{r.recipe(["The Infinite Pursuit", "Blessing of Uul-Netol"], ["The Red Trail"])}
+          tr !{r.recipe(["The Anticipation", "Blessing of Uul-Netol"], ["The Surrender"])}
+          tr !{r.recipe(["Uul-Netol's Kiss", "Blessing of Uul-Netol"], ["Uul-Netol's Embrace"])}
+          tr !{r.recipe(["The Formless Flame", "Blessing of Xoph"], ["The Formless Inferno"])}
+          tr !{r.recipe(["Xoph's Heart", "Blessing of Xoph"], ["Xoph's Blood"])}
+          tr !{r.recipe(["Xoph's Inception", "Blessing of Xoph"], ["Xoph's Nurture"])}
+      
+      
       h1 Challenges
       h2 Divination for Item
       h3 Divination for Essence
@@ -180,6 +209,7 @@ html
       | , find the code on 
       a(href='https://github.com/FrancoisMentec/worth-poe') GitHub
   script(src='/js/main.js')
+  script(src='/js/sort.js')
   script(src='/js/itemPreview.js')
   if search != null
     script search('!{search}')
