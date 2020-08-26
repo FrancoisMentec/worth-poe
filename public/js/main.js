@@ -1,5 +1,6 @@
 let content = document.getElementById('content')
 
+// Search
 function search (query) {
   if (query.length > 0) {
     let regExp = new RegExp(query, 'i')
@@ -36,4 +37,22 @@ document.getElementById('search').addEventListener('input', e => {
 let urlParams = new URLSearchParams(window.location.search)
 if (urlParams.get('search') != null) {
   search(urlParams.get('search'))
+}
+
+// Content Table
+let table = document.getElementById('table')
+
+for (let elt of content.children) {
+  if (/H\d/.test(elt.tagName) && typeof elt.id === 'string' && elt.id.length > 0) {
+    let link = document.createElement('a')
+    link.setAttribute('href', '#' + elt.id)
+    link.textContent = elt.textContent
+    link.style.marginLeft = 24 * (parseInt(elt.tagName.substring(1)) - 1)
+    table.appendChild(link)
+  }
+}
+
+function toggleTable () {
+  table.classList.toggle('visible')
+  content.classList.toggle('table-visible')
 }

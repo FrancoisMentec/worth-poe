@@ -13,7 +13,7 @@
   z-index: 1000;
 }
 
-.nav-bar a {
+.nav-bar a, .nav-bar button {
   display: inline-block;
   text-decoration: none;
   color: white;
@@ -21,9 +21,24 @@
   padding: 0 16px 0 16px;
   font-family: Roboto-Bold;
   height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  vertical-align: middle;
 }
 
-.nav-bar a:hover {
+/*.nav-bar #toggleTable {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  height: 64px;
+  line-height: 64px;
+  vertical-align: top;
+  cursor: pointer;
+}*/
+
+.nav-bar a:hover, .nav-bar button:hover {
   background-color: #263238;
 }
 
@@ -45,6 +60,7 @@
 #search-wrap {
   display: inline-block;
   position: relative;
+  margin-left: 16px;
 }
 
 #search-wrap .material-icons {

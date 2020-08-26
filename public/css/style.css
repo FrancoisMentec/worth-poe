@@ -58,12 +58,41 @@ body {
 }
 
 body > #content {
+  transition: 0.2s;
   padding: 16px;
   width: fit-content;
 }
 
+body > #content.table-visible {
+  padding-left: 316px;
+}
+
 a {
   color: #ff9800;
+}
+
+/* Content Table */
+#table {
+  transition: 0.2s;
+  box-sizing: border-box;
+  position: fixed;
+  left: -300px;
+  top: 64px;
+  width: 300px;
+  height: calc(100% - 64px);
+  padding: 16px;
+  background-color: #102027;
+  z-index: 1000;
+}
+
+#table.visible {
+  left: 0;
+  box-shadow: 0 10px 10px rgba(0,0,0,0.4);
+}
+
+#table a {
+  display: block;
+  margin: 8px;
 }
 
 /*a:visited {
