@@ -10,6 +10,7 @@ let trade = new Trade('searches.json')
 
 const Render = require('./src/render.js')
 let renders = {}
+let pages = {}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
@@ -20,6 +21,11 @@ let init = false
 async function fetchPrice () {
   for (let league of LEAGUES_ALIAS) {
     renders[league].fetchPrice().then(() => {
+      pages[league] = pug.renderFile(__dirname + '/public/html/index.pug', {
+        r: renders[league],
+        league: league,
+        fetchInterval: FETCH_INTERVAL
+      })
       console.log(`Prices fetched for ${league}`)
     })
   }
@@ -60,12 +66,8 @@ app.get('/', (req, res) => {
 
 app.get('/:league', (req, res) => {
   if (LEAGUES_ALIAS.includes(req.params.league)) {
-    if (typeof renders[req.params.league] !== 'undefined' && renders[req.params.league].ready) {
-      res.render(__dirname + '/public/html/index.pug', {
-        r: renders[req.params.league],
-        league: req.params.league,
-        fetchInterval: FETCH_INTERVAL,
-        search: req.query.search || null })
+    if (typeof pages[req.params.league] !== 'undefined') {
+      res.send(pages[req.params.league])
     } else res.render(__dirname + '/public/html/not_ready.pug')
   } else {
     res.redirect('/challenge')

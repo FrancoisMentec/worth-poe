@@ -1,4 +1,5 @@
 let content = document.getElementById('content')
+
 function search (query) {
   if (query.length > 0) {
     let regExp = new RegExp(query, 'i')
@@ -31,3 +32,8 @@ document.getElementById('search').addEventListener('input', e => {
   if (e.srcElement.value.length > 0) window.history.replaceState({},"", '?search=' + encodeURIComponent(e.srcElement.value))
   else window.history.replaceState({},"", location.pathname)
 })
+
+let urlParams = new URLSearchParams(window.location.search)
+if (urlParams.get('search') != null) {
+  search(urlParams.get('search'))
+}
