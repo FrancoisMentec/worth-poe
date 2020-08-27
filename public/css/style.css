@@ -82,12 +82,13 @@ a {
   height: calc(100% - 64px);
   padding: 16px;
   background-color: #102027;
-  z-index: 1000;
+  z-index: 900;
+  overflow: auto;
 }
 
 #table.visible {
   left: 0;
-  box-shadow: 0 10px 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 #table a {

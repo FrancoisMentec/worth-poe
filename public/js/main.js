@@ -52,7 +52,8 @@ for (let elt of content.children) {
   }
 }
 
-function toggleTable () {
+function toggleTable (button) {
+  button.classList.toggle('open')
   table.classList.toggle('visible')
   content.classList.toggle('table-visible')
 }

@@ -6,8 +6,9 @@ html
     link(rel='stylesheet', href='/css/divination.css')
   body
     div.nav-bar
-      button#toggleTable(onclick='toggleTable()')
-        span.material-icons toc
+      button#toggle-table(onclick='toggleTable(this)')
+        span.material-icons.open toc
+        span.material-icons.close close
       a(href='/challenge', class=league === 'challenge' ? 'active' : '') Challenge
       a(href='/challengehc', class=league === 'challengehc' ? 'active' : '') Challenge Hardcore
       a(href='/standard', class=league === 'standard' ? 'active' : '') Standard
@@ -20,6 +21,7 @@ html
         | GitHub
     
     div#table
+      h1 Table of Content
     div#content
       h1 Worth PoE
       p 

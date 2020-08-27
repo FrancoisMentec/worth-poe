@@ -27,16 +27,17 @@
   vertical-align: middle;
 }
 
-/*.nav-bar #toggleTable {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  color: white;
-  height: 64px;
-  line-height: 64px;
-  vertical-align: top;
-  cursor: pointer;
-}*/
+#toggle-table .close {
+  display: none;
+}
+
+#toggle-table.open .close  {
+  display: block;
+}
+
+#toggle-table.open .open  {
+  display: none;
+}
 
 .nav-bar a:hover, .nav-bar button:hover {
   background-color: #263238;
