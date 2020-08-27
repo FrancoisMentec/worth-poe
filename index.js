@@ -12,6 +12,11 @@ const Render = require('./src/render.js')
 let renders = {}
 let pages = {}
 
+const ENV = process.argv.indexOf('-d')
+  ? 'dev'
+  : 'prod'
+console.log(`Environement: ${ENV}`)
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -67,12 +72,15 @@ app.get('/', (req, res) => {
 app.get('/:league', (req, res) => {
   if (LEAGUES_ALIAS.includes(req.params.league)) {
     if (typeof pages[req.params.league] !== 'undefined') {
-      res.send(pages[req.params.league])
-      /*res.render(__dirname + '/public/html/index.pug', {
-        r: renders[req.params.league],
-        league: req.params.league,
-        fetchInterval: FETCH_INTERVAL
-      })*/
+      if (ENV == 'prod') {
+        res.send(pages[req.params.league])
+      } else if (ENV == 'dev') {
+        res.render(__dirname + '/public/html/index.pug', {
+          r: renders[req.params.league],
+          league: req.params.league,
+          fetchInterval: FETCH_INTERVAL
+        })
+      }
     } else res.render(__dirname + '/public/html/not_ready.pug')
   } else {
     res.redirect('/challenge')
