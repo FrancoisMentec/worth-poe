@@ -1,5 +1,8 @@
 const price = require('./price.js')
 
+const DIVINATION = 6
+const PROPHECY = 8
+
 class Render {
   constructor (league='challenge', trade=null) {
     this.prices = null
@@ -29,8 +32,18 @@ class Render {
     return res
   }
 
-  getItem (name) {
-    return this.prices[name]
+  getItem (name, itemClass=null) {
+    let i = this.prices[name]
+    if (Array.isArray(i)) {
+      if (itemClass != null) {
+        i = i.filter(v => v.itemClass == itemClass)
+        if (i.length <= 0) throw new Error(`No item named ${name} of class ${itemClass}`)
+        else if (i.length > 1) throw new Error(`Multiple items named ${name} of class ${itemClass}`)
+        else return i[0]
+      } else {
+        throw new Error(`Multiple items named: ${name}, you should had more filters`)
+      }
+    } else return i
   }
 
   async fetchPrice () {
@@ -42,18 +55,18 @@ class Render {
     }
   }
 
-  tradeLink (name) {
+  tradeLink (name, itemClass=null) {
     let res = `/trade/${this.league}`
-    if ([5, 6].includes(this.getItem(name).itemClass)) res += `?type=${encodeURIComponent(name)}`
+    if ([5, 6].includes(this.getItem(name, itemClass=itemClass).itemClass)) res += `?type=${encodeURIComponent(name)}`
     else res += `?name=${encodeURIComponent(name)}`
     return res
   }
 
-  item (name, type=null) {
-    if (typeof this.getItem(name) == 'undefined') return `<td><div class="item">Item missing: ${name}</div></td>`
-    let item = this.getItem(name)
+  item (name, itemClass=null) {
+    let item = this.getItem(name, itemClass)
+    if (typeof item == 'undefined') return `<td><div class="item">Item missing: ${name}</div></td>`
     return `<td value="${item.chaosValue}">
-    <a class="item", href="${this.tradeLink(name)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${item.stackSize}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
+    <a class="item", href="${this.tradeLink(name, itemClass)}" target="_blank" name="${name}" itemClass="${item.itemClass}" stackSize="${Math.max(item.stackSize, 1)}" artFilename="${item.artFilename}" flavourText="${this.encodeFlavour(item.flavourText)}" explicitModifiers="${this.encodeModifiers(item.explicitModifiers)}">
         <div class="name">
           <img src="${item.icon}"> ${name}
         </div>
@@ -98,13 +111,14 @@ class Render {
   }
 
   divination (name) {
-    let stack = typeof this.getItem(name) !== 'undefined'
-      ? this.getItem(name).stackSize
+    let item = this.getItem(name, DIVINATION)
+    let stack = typeof item !== 'undefined'
+      ? Math.max(item.stackSize, 1)
       : null
     let price = stack != null
-      ? this.getItem(name).chaosValue * stack
+      ? item.chaosValue * stack
       : null
-    let res = this.item(name, 'divination')
+    let res = this.item(name, DIVINATION)
     res += stack != null
       ? `<td class="right" value="${stack}">${stack}</td>`
       : `<td class="right">-</td>`

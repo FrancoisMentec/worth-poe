@@ -67,7 +67,7 @@ module.exports.getAllPrices = async function (league='challenge') {
       let data = await getPriceFromNinja(url)
       for (let item in data) {
         if (typeof items[item] !== 'undefined') {
-          if (items[item].itemClass == data[item].itemClass) {
+          /*if (items[item].itemClass == data[item].itemClass) {
             throw new Error(`Got two items with the same name (${item}) and the same item class (${data[item].itemClass})`)
           } else {
             let temp = {}
@@ -75,6 +75,11 @@ module.exports.getAllPrices = async function (league='challenge') {
             items[item] = {}
             items[item][items[item].itemClass] = temp
             items[item][data[item].itemClass] = data[item]
+          }*/
+          if (Array.isArray(items[item])) {
+            items[item].push(data[item])
+          } else {
+            items[item] = [items[item], data[item]]
           }
         } else items[item] = data[item]
       }
