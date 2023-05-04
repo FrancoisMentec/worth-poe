@@ -12,12 +12,14 @@ const Render = require('./src/render.js')
 let renders = {}
 let pages = {}
 
+const FETCH_INTERVAL = 10 * 60 * 1000 // Interval in ms at which price are fetched
+
 const ENV = process.argv.indexOf('-d')
   ? 'dev'
   : 'prod'
 console.log(`Environement: ${ENV}`)
 
-function sleep(ms) {
+function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
@@ -43,7 +45,7 @@ async function fetchPrice () {
 const LEAGUES_ALIAS = ['challenge', 'challengehc', 'standard', 'hardcore']
 let leaguesNames = null
 
-axios.get('http://api.pathofexile.com/leagues').then(res => {
+/*axios.get('https://api.pathofexile.com/leagues').then(res => {
   leaguesNames = {
     'standard': res.data[0].id,
     'hardcore': res.data[1].id,
@@ -58,9 +60,23 @@ axios.get('http://api.pathofexile.com/leagues').then(res => {
   }
 
   fetchPrice()
-})
+}).catch(error => {
+  console.error(`Failed to fetch leagues names: ${error.code}`)
+  process.exit(1)
+})*/
 
-const FETCH_INTERVAL = 10 * 60 * 1000
+leaguesNames = {
+  standard: 'standard',
+  hardcore: 'hardcore',
+  challenge: 'challenge',
+  challengehc: 'challengehc'
+}
+
+for (let league of LEAGUES_ALIAS) {
+  renders[league] = new Render(leaguesNames[league], trade)
+}
+
+fetchPrice()
 
 app.use(express.static('public'))
 app.set('view engine', 'pug')

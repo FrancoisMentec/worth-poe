@@ -1,6 +1,6 @@
 let items = document.getElementsByClassName('item')
 
-let textColorRegex = /<(gemitem|default|currencyitem|normal|whiteitem|augmented|magic|magicitem|rare|rareitem|unique|uniqueitem|corrupted|prophecy)>{([^}]+)}/gm
+let textColorRegex = /<(gemitem|default|currencyitem|normal|whiteitem|augmented|magic|magicitem|rare|rareitem|unique|uniqueitem|corrupted)>{([^}]+)}/gm
 
 function parseDivinationReward (reward) {
   let res = reward //.replace(/<br>/g, '\n')

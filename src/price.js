@@ -58,8 +58,7 @@ module.exports.getAllPrices = async function (league='challenge') {
     `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueWeapon&language=en`,
     `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueFlask&language=en`,
     `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=UniqueJewel&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=DivinationCard&language=en`,
-    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=Prophecy&language=en`
+    `https://poe.ninja/api/data/itemoverview?league=${leagueEncoded}&type=DivinationCard&language=en`
   ]
   let items = {}
   for (let url of urls) {

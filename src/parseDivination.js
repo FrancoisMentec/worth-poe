@@ -21,7 +21,6 @@ let filters = {
   'Gem': html => /class="text-color -gem"/.test(html),
   'Influenced Item': html => /href="\/Influenced_item"/.test(html),
   'Jewel': html => /jewel\W/i.test(html),
-  'Prophecy': html => /class="text-color -prophecy"/.test(html),
   'Scarab': html => /scarab/i.test(html),
   'Six-Linked Item': html => /six-link|Tabula Rasa|Charan's Sword/i.test(html),
   'Two-Implicit Unique Item': html => /class="text-color -unique".*two-implicit/i.test(html),
