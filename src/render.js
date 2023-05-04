@@ -1,7 +1,6 @@
 const price = require('./price.js')
 
 const DIVINATION = 6
-const PROPHECY = 8
 
 class Render {
   constructor (league='challenge', trade=null) {
@@ -49,6 +48,7 @@ class Render {
   async fetchPrice () {
     try {
       this.prices = await price.getAllPrices(this.league)
+      
     } catch (error) {
       console.error(`An error occured while fetching price for ${this.league}:`)
       console.error(error)
