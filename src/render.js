@@ -1,8 +1,9 @@
-const price = require('./price.js')
+import { getAllPrices } from './price.js'
+import fs from 'fs'
 
 const DIVINATION = 6
 
-class Render {
+export default class Render {
   constructor (league='challenge', trade=null) {
     this.prices = null
     this.league = league
@@ -47,8 +48,9 @@ class Render {
 
   async fetchPrice () {
     try {
-      this.prices = await price.getAllPrices(this.league)
-      
+      this.prices = await getAllPrices(this.league)
+      fs.writeFileSync(`prices_${this.league}.json`, JSON.stringify(this.prices))
+      console.log('Prices written')
     } catch (error) {
       console.error(`An error occured while fetching price for ${this.league}:`)
       console.error(error)
@@ -128,5 +130,3 @@ class Render {
     return res
   }
 }
-
-module.exports = Render

@@ -1,7 +1,7 @@
-const axios = require('axios')
-const fs = require('fs')
+import axios from 'axios'
+import fs from 'fs'
 
-class Trade {
+export default class Trade {
   constructor (path=null) {
     this.path = path
     this.searches = {}
@@ -67,5 +67,3 @@ class Trade {
     }
   }
 }
-
-module.exports = Trade

@@ -1,14 +1,14 @@
-const axios = require('axios')
-const express = require('express')
+import axios from 'axios'
+import express from 'express'
 const app = express()
 const port = 3000
 
-const pug = require('pug')
+import pug from 'pug'
 
-const Trade = require('./src/trade.js')
+import Trade from './src/trade.js'
 let trade = new Trade('searches.json')
 
-const Render = require('./src/render.js')
+import Render from './src/render.js'
 let renders = {}
 let pages = {}
 
@@ -28,7 +28,7 @@ let init = false
 async function fetchPrice () {
   for (let league of LEAGUES_ALIAS) {
     renders[league].fetchPrice().then(() => {
-      pages[league] = pug.renderFile(__dirname + '/public/html/index.pug', {
+      pages[league] = pug.renderFile('./public/html/index.pug', {
         r: renders[league],
         league: league,
         fetchInterval: FETCH_INTERVAL
@@ -66,10 +66,10 @@ let leaguesNames = null
 })*/
 
 leaguesNames = {
-  standard: 'standard',
-  hardcore: 'hardcore',
-  challenge: 'challenge',
-  challengehc: 'challengehc'
+  standard: 'Standard',
+  hardcore: 'Hardcore',
+  challenge: 'Crucible',
+  challengehc: 'Hardcore+Crucible'
 }
 
 for (let league of LEAGUES_ALIAS) {
@@ -79,6 +79,7 @@ for (let league of LEAGUES_ALIAS) {
 fetchPrice()
 
 app.use(express.static('public'))
+app.set('views', './public/html')
 app.set('view engine', 'pug')
 
 app.get('/', (req, res) => {
@@ -91,13 +92,13 @@ app.get('/:league', (req, res) => {
       if (ENV == 'prod') {
         res.send(pages[req.params.league])
       } else if (ENV == 'dev') {
-        res.render(__dirname + '/public/html/index.pug', {
+        res.render('index.pug', {
           r: renders[req.params.league],
           league: req.params.league,
           fetchInterval: FETCH_INTERVAL
         })
       }
-    } else res.render(__dirname + '/public/html/not_ready.pug')
+    } else res.render('not_ready.pug')
   } else {
     res.redirect('/challenge')
   }
@@ -111,7 +112,7 @@ app.get('/trade/:league', (req, res) => {
     res.redirect(link)
   }).catch(error => {
     //if (!error.response || error.response.status != 429) console.error(error)
-    res.render(__dirname + '/public/html/trade_error.pug')
+    res.render('trade_error.pug')
   })
 })
 

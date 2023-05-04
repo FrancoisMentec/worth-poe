@@ -1,7 +1,7 @@
-const axios = require('axios')
-const jsdom = require("jsdom")
+import axios from 'axios'
+import jsdom from 'jsdom'
 const { JSDOM } = jsdom
-const fs = require('fs')
+import fs from 'fs'
 
 const DIVINATION_URL = 'https://pathofexile.gamepedia.com/List_of_divination_cards'
 
@@ -55,7 +55,7 @@ async function parseDivination () {
     pug += '\n\n'
   }
 
-  fs.writeFileSync(__dirname + '/../public/html/div4item.pug', pug)
+  fs.writeFileSync('../public/html/div4item.pug', pug)
   console.log('pug file generated')
 }
 

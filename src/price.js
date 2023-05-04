@@ -1,4 +1,4 @@
-const https = require('https')
+import https from 'https'
 
 function getPriceFromNinja (url) {
   return new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ function getPriceFromNinja (url) {
   })
 }
 
-module.exports.getAllPrices = async function (league='challenge') {
+export async function getAllPrices (league='challenge') {
   let leagueEncoded = encodeURIComponent(league)
   const urls = [
     `https://poe.ninja/api/data/currencyoverview?league=${leagueEncoded}&type=Currency&language=en`,
